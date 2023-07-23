@@ -48,6 +48,7 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
 fi
 
 echo "Adding the Image in outdir"
+cp ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ${OUTDIR}
 
 echo "Creating the staging directory for the root filesystem"
 cd "$OUTDIR"
@@ -92,8 +93,8 @@ make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE}
 make CONFIG_PREFIX=${rootfs_dir} ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} install
 
 echo "Library dependencies"
-${CROSS_COMPILE}readelf -a bin/busybox | grep "program interpreter"
-${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
+#${CROSS_COMPILE}readelf -a bin/busybox | grep "program interpreter"
+#${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 
 # TODO: Add library dependencies to rootfs
 # Find them in the sysroot of the cross compile tool chain
@@ -124,6 +125,7 @@ cp ${FINDER_APP_DIR}/finder.sh ${rootfs_dir}/home/
 cp -r ${FINDER_APP_DIR}/conf/ ${rootfs_dir}/home/
 cp ${FINDER_APP_DIR}/finder-test.sh ${rootfs_dir}/home/
 cp ${FINDER_APP_DIR}/autorun-qemu.sh ${rootfs_dir}/home/
+cp ${FINDER_APP_DIR}/../full-test.sh ${rootfs_dir}/home/
 
 # TODO: Chown the root directory
 sudo chown -R root:root ${rootfs_dir}
