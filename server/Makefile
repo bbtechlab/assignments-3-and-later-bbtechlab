@@ -1,5 +1,5 @@
-# CROSS_COMPILE?=aarch64-none-linux-gnu-
-CROSS_COMPILE?=
+CROSS_COMPILE?=aarch64-none-linux-gnu-
+#CROSS_COMPILE?=
 CC=$(CROSS_COMPILE)gcc
 CFLAGS ?= -Wall 
 LDFLAGS ?= -pthread
